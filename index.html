@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Overview — Freak Nexus</title>
+
+<!-- SEO -->
+<meta name="description" content="Freak Nexus — Designer, Content Strategist, and SEO Specialist building performance-driven digital systems.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://yourdomain.com">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- AOS -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"Person",
+ "name":"Freak Nexus",
+ "url":"https://yourdomain.com",
+ "jobTitle":"Designer & Developer"
+}
+</script>
+
+<style>
+.skills-list { display: flex; flex-direction: column; gap: 1.2rem; }
+.capabilities-wrap { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: center; }
+@media (max-width: 800px){ .capabilities-wrap { grid-template-columns: 1fr; } }
+
+/* PIE CHART */
+.pie-chart{ width:260px; height:260px; margin:auto; }
+.pie-chart text{ fill:#7a9f96; font-size:5px; letter-spacing:.5px; font-weight:500; }
+.pie-legend{ margin-top:1rem; font-size:14px; color:#aaa; text-align:left; }
+
+/* SKILL COLOR MATCH */
+.skill.design .fill{ background:var(--design); }
+.skill.marketing .fill{ background:var(--marketing); }
+.skill.content .fill{ background:var(--content); }
+.skill.seo .fill{ background:var(--seo); }
+.skill.design span{ color:var(--design); }
+.skill.marketing span{ color:var(--marketing); }
+.skill.content span{ color:var(--content); }
+.skill.seo span{ color:var(--seo); }
+
+/* VOID SYSTEM */
+:root{
+  --void:#0b0b0d;
+  --surface:#0f0f11;
+  --card:#16161a;
+  --border:#222;
+  --text:#eaeaea;
+  --muted:#9a9a9a;
+  --accent:#00ffcc;
+  --accent-2:#34c74a;
+  --design:#5aa9ff;
+  --marketing:#34c74a;
+  --content:#00ffcc;
+  --seo:#ff9f43;
+}
+
+/* BASE */
+*{margin:0;padding:0;box-sizing:border-box}
+body{ font-family:'Poppins',sans-serif; background:var(--surface); color:var(--text); overflow-x:hidden; }
+a{text-decoration:none;color:inherit}
+section{padding:4rem 0}
+.container{width:90%;max-width:1200px;margin:auto}
+h1,h2,h3{color:#fff}
+p{color:var(--muted)}
+
+/* LOGO */
+.logo{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.4rem; color:#00ff88; }
+
+/* NAV */
+.navbar{ position:fixed; top:0;width:100%; background:rgba(11,11,13,.75); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,.06); z-index:999; }
+.navbar .container{ display:flex; justify-content:space-between; align-items:center; padding:1rem 0; }
+.menu{ display:flex; gap:2rem; }
+.menu a{ font-size:.85rem; letter-spacing:1px; color:#bdbdbd; position:relative; transition:.25s; }
+.menu a::after{ content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--accent); transition:.3s; }
+.menu a:hover{color:#fff}
+.menu a:hover::after{width:100%}
+
+/* HERO */
+.hero{ height:100vh; display:flex; align-items:center; position:relative; background:url("assets/background.png") center/cover no-repeat; }
+.hero::before{ content:""; position:absolute; inset:0; background: radial-gradient(circle at 30% 30%, rgba(0,255,204,.12), transparent 40%), linear-gradient(to bottom, rgba(11,11,13,.2), rgba(11,11,13,.9)); }
+.hero .container{ position:relative; z-index:1; }
+.hero h1{ font-size:3.2rem; line-height:1.1; }
+.hero p{ margin-top:1rem; font-size:1.2rem; }
+#typing{color:var(--accent)}
+
+/* HEADINGS */
+h2{ text-align:center; margin-bottom:2rem; font-size:2.2rem; }
+
+/* CARDS */
+.card{ background:linear-gradient(180deg,var(--card),var(--void)); border:1px solid var(--border); border-radius:10px; padding:2rem; transition:.35s; }
+.card:hover{ transform:translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.7), inset 0 0 0 1px rgba(0,255,204,.08); }
+
+/* SKILLS */
+.skill{margin-bottom:1.2rem}
+.skill span{display:block;margin-bottom:.4rem;color:#ccc}
+.bar{background:#222;height:8px;border-radius:20px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+
+/* GRID */
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
+
+/* PORTFOLIO */
+.portfolio-item{ position:relative; height:200px; overflow:hidden; padding:0; }
+.portfolio-item img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.overlay{ position:absolute; inset:0; background:linear-gradient(to bottom, rgba(15,15,17,.6), rgba(15,15,17,.9)); display:flex; justify-content:center; align-items:center; opacity:0; transition:.4s; }
+.overlay h4{ color:var(--accent); letter-spacing:1px; }
+.portfolio-item:hover .overlay{opacity:1}
+
+/* CTA */
+.cta-button{ position:relative; padding:14px 22px; background:#000; color:#eaeaea; font-weight:600; border:none; border-radius:10px; cursor:pointer; isolation:isolate; }
+.cta-button::before{ content:""; position:absolute; inset:0; border-radius:10px; padding:6px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; }
+
+/* FOOTER */
+footer{ text-align:center; padding:2rem; border-top:1px solid var(--border); color:#777; }
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="container">
+    <div class="logo">&lt;/Arzoo&gt;</div>
+    <nav class="menu">
+      <a href="#about">About</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#executions">Executions</a>
+      <a href="#signal">Signal</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>
+      I Design Systems<br>
+      That Turn Attention<br>
+      Into Measurable Growth
+    </h1>
+    <p>
+      I operate where strategy, content, and execution intersect.
+      <br>
+      <span id="typing"></span>
+    </p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <h2>About</h2>
+    <div class="card" data-aos="fade-up">
+      <p style="color:#cfcfcf;margin-bottom:1rem">
+        I am a results-driven digital professional specializing in marketing, design, content writing, and search engine optimization (SEO). I focus on building strategies and digital assets that align with audience intent while delivering measurable growth and visibility.<br>
+
+<br>As a marketer, I work with a strategy-first approach to ensure every initiative supports clear business objectives. As a designer, I create clean, user-focused visuals that enhance brand identity and improve user experience. In content writing, I produce structured, engaging, and value-driven content that builds trust and authority. In SEO, I apply data-backed techniques, keyword research, and on-page optimization to drive sustainable organic performance.<br>
+
+<br>I combine creativity, design thinking, and analytics to deliver digital solutions that are practical, scalable, and performance-oriented.
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="container">
+    <h2>Capabilities</h2>
+
+    <div class="card" data-aos="fade-up" style="margin-bottom:2.5rem">
+      I don’t list everything here by design.
+      <br><br>
+      Much of my work lives inside systems — research frameworks, content architectures, internal tooling, and SEO structures that don’t translate cleanly into visuals.
+    </div>
+
+    <div class="capabilities-wrap">
+      <!-- LEFT: SKILL BARS -->
+      <div class="skills-list">
+        <div class="skill design">
+          <span>Designing</span>
+          <div class="bar"><div class="fill" style="width:60%"></div></div>
+        </div>
+
+        <div class="skill marketing">
+          <span>Marketing</span>
+          <div class="bar"><div class="fill" style="width:75%"></div></div>
+        </div>
+
+        <div class="skill content">
+          <span>Content Writing</span>
+          <div class="bar"><div class="fill" style="width:85%"></div></div>
+        </div>
+
+        <div class="skill seo">
+          <span>SEO</span>
+          <div class="bar"><div class="fill" style="width:60%"></div></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: PIE CHART -->
+      <div>
+        <svg viewBox="0 0 42 42" class="pie-chart">
+          <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#1f1f23" stroke-width="6"/>
+          <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#00ffcc" stroke-width="6" stroke-dasharray="32 68" stroke-dashoffset="0"/>
+          <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#34c74a" stroke-width="6" stroke-dasharray="27 73" stroke-dashoffset="-32"/>
+          <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#5aa9ff" stroke-width="6" stroke-dasharray="23 77" stroke-dashoffset="-59"/>
+          <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#ff9f43" stroke-width="6" stroke-dasharray="18 82" stroke-dashoffset="-82"/>
+          <text x="21" y="21" text-anchor="middle" dominant-baseline="central">Skill Mix</text>
+        </svg>
+        <p style="font-size:14px;color:#8f8f8f;text-align:center;margin-top:1rem">
+          This reflects focus distribution, not skill limits.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTIONS -->
+<section id="executions">
+  <div class="container">
+    <h2>Executions</h2>
+    <p style="text-align:center;color:#9a9a9a;margin-bottom:2rem">
+      Selected executions. Most work operates behind the surface.
+    </p>
+    <div class="grid">
+      <div class="card portfolio-item">
+        <img src="assets/blogs.png" loading="lazy" alt="SEO Blogs and Content Writing Projects">
+        <div class="overlay"><a href="blogs-lib.html"><h4>Blogs</h4></a></div>
+      </div>
+      <div class="card portfolio-item">
+        <img src="assets/games.png" loading="lazy" alt="Games">
+        <div class="overlay"><a href="games-lib.html"><h4>Single Page Html Games</h4></a></div>
+      </div>
+      <div class="card portfolio-item">
+        <img src="assets/designs.png" loading="lazy" alt="Designs">
+        <div class="overlay"><a href="Design-lib.html"><h4>Designs</h4></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNAL -->
+<section id="signal">
+  <div style="max-width: 600px; margin: 40px auto; text-align: center;">
+    <p style="color:#a8a8a8; line-height:1.8; margin-bottom:30px;">
+      Ready to explore the intersection of strategy, creation, and abstraction? Let's build something that endures.
+    </p>
+    <div style="display: grid; gap: 15px;">
+      <button class="cta-button" style="width:100%; text-align:center; margin-top:0;" onclick="window.location.href='mailto:Nemesistrionpid@proton.me';">
+        <strong>Connect With Me</strong>
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Signal Stable • Systems First • Obsidian Pulse
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({duration:900,once:true});</script>
+
+<script>
+const words=["Content Strategist","SEO Specialist","Digital Systems Designer"];
+let i=0,j=0,d=false,el=document.getElementById("typing");
+(function t(){
+  el.textContent=words[i].slice(0,j);
+  d?j--:j++;
+  if(j===words[i].length)d=true;
+  if(j===0&&d){d=false;i=(i+1)%words.length}
+  setTimeout(t,d?80:120);
+})();
+</script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+gsap.from(".hero h1",{y:80,opacity:0,duration:1.2,ease:"power4.out"});
+gsap.utils.toArray("section").forEach(s=>{
+  gsap.from(s,{opacity:0,y:60,scrollTrigger:{trigger:s,start:"top 85%"}});
+});
+</script>
+
+</body>
+</html>
