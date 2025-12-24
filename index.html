@@ -34,6 +34,165 @@
 </script>
 
 <style>
+
+/* --- FIX: LAYER HIERARCHY --- */
+
+/* 1. Ensure the Overlay is always on top of the animations */
+.overlay {
+    z-index: 10; 
+    /* Make the dark background slightly stronger so text pops */
+    background: rgba(11, 11, 13, 0.85); 
+    /* Optional: Blur the animation behind the text for a cool glass effect */
+    backdrop-filter: blur(4px); 
+}
+
+/* 2. Push the animations/images to the back */
+.execution-stage {
+    z-index: 1;
+}
+
+/* 3. When hovering, push the animations further back visually */
+.portfolio-item:hover .execution-stage {
+    opacity: 0.4; /* Dim the neon graphics so text is clear */
+    transform: scale(1.02); /* Subtle zoom effect */
+    transition: all 0.4s ease;
+}
+
+/* --- EXECUTION VISUALS (Replaces Images) --- */
+/* --- BACKGROUND THUMBNAIL IMAGES --- */
+.bg-thumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25; /* Low opacity so the animation pops */
+    z-index: 0;
+    filter: grayscale(100%); /* Optional: makes it look techy/unified */
+    transition: 0.5s;
+}
+
+/* Ensure animations sit ON TOP of the image */
+.execution-stage > *:not(.bg-thumb) {
+    position: relative;
+    z-index: 1; 
+}
+
+/* Hover Effect: Bring color back to image */
+.portfolio-item:hover .bg-thumb {
+    opacity: 0.4;
+    filter: grayscale(0%);
+    transform: scale(1.05); /* Subtle zoom */
+}
+
+.execution-stage {
+    width: 100%;
+    height: 100%;
+    background: var(--card);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 1. BLOGS: The Data Stream */
+.data-doc {
+    width: 80px;
+    height: 100px;
+    border: 2px solid var(--content); /* Cyan */
+    border-radius: 4px;
+    position: relative;
+    background: 
+        linear-gradient(to bottom, var(--content) 2px, transparent 2px) 0 10px,
+        linear-gradient(to bottom, var(--content) 2px, transparent 2px) 0 25px,
+        linear-gradient(to bottom, var(--content) 2px, transparent 2px) 0 40px,
+        linear-gradient(to right, var(--content) 2px, transparent 2px) 100% 100%; /* Corner accent */
+    background-size: 60% 4px, 80% 4px, 50% 4px, 10px 10px;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+}
+/* The scanning bar */
+.data-doc::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,255,204,0.2) 50%, transparent 100%);
+    background-size: 100% 200%;
+    animation: scan-doc 2s linear infinite;
+}
+
+/* 2. GAMES: The SVG Invader */
+.pixel-invader-svg {
+    width: 80px;  /* Explicit size = Perfect centering */
+    height: 60px;
+    fill: var(--seo); /* Orange */
+    animation: bounce-invader 2s ease-in-out infinite alternate;
+}
+
+/* Hover Effect: Changes color */
+.portfolio-item:hover .pixel-invader-svg {
+    fill: var(--accent); /* Cyan */
+    filter: drop-shadow(0 0 5px var(--accent));
+}
+
+@keyframes bounce-invader {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+/* 3. DESIGNS: The Cyber Prism */
+.prism-wrap {
+    position: relative;
+    width: 100px; height: 100px;
+}
+.shape {
+    position: absolute;
+    mix-blend-mode: screen; /* Blends colors where they overlap */
+    opacity: 0.7;
+}
+.shape-circle {
+    width: 60px; height: 60px;
+    background: var(--design); /* Blue */
+    border-radius: 50%;
+    top: 0; left: 20px;
+    animation: float-shape 4s ease-in-out infinite;
+}
+.shape-tri {
+    width: 0; height: 0;
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-bottom: 60px solid var(--marketing); /* Green */
+    bottom: 0; left: 0;
+    animation: float-shape 4s ease-in-out 1s infinite;
+}
+.shape-box {
+    width: 50px; height: 50px;
+    background: var(--seo); /* Orange */
+    bottom: 10px; right: 0;
+    transform: rotate(45deg);
+    animation: float-shape 4s ease-in-out 2s infinite;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes scan-doc {
+    0% { background-position: 0% -100%; }
+    100% { background-position: 0% 200%; }
+}
+@keyframes bounce-invader {
+    0% { transform: scale(0.6) translateY(0); }
+    100% { transform: scale(0.6) translateY(-10px); }
+}
+@keyframes float-shape {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+}
+
+/* Hover States for Cards */
+.portfolio-item:hover .data-doc { border-color: #fff; }
+.portfolio-item:hover .pixel-invader { color: var(--accent); } 
+.portfolio-item:hover .shape { opacity: 1; filter: blur(2px); }
+
 .skills-list { display: flex; flex-direction: column; gap: 1.2rem; }
 .capabilities-wrap { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: center; }
 @media (max-width: 800px){ .capabilities-wrap { grid-template-columns: 1fr; } }
@@ -234,22 +393,59 @@ footer{ text-align:center; padding:2rem; border-top:1px solid var(--border); col
     <p style="text-align:center;color:#9a9a9a;margin-bottom:2rem">
       Selected executions. Most work operates behind the surface.
     </p>
-    <div class="grid">
+<div class="grid">
+      
       <div class="card portfolio-item">
-        <img src="assets/blogs.png" loading="lazy" alt="SEO Blogs and Content Writing Projects">
+        <div class="execution-stage">
+            <img src="assets/blogs.png" class="bg-thumb" alt="Blogs Background">
+            
+            <div class="data-doc"></div>
+        </div>
         <div class="overlay"><a href="blogs-lib.html"><h4>Blogs</h4></a></div>
       </div>
+
       <div class="card portfolio-item">
-        <img src="assets/games.png" loading="lazy" alt="Games">
+        <div class="execution-stage">
+            <img src="assets/games.png" class="bg-thumb" alt="Games Background">
+
+            <svg class="pixel-invader-svg" viewBox="0 0 110 80">
+                <rect x="20" y="0" width="10" height="10" />
+                <rect x="80" y="0" width="10" height="10" />
+                <rect x="30" y="10" width="10" height="10" />
+                <rect x="70" y="10" width="10" height="10" />
+                <rect x="20" y="20" width="70" height="10" />
+                <rect x="10" y="30" width="20" height="10" />
+                <rect x="40" y="30" width="30" height="10" />
+                <rect x="80" y="30" width="20" height="10" />
+                <rect x="0" y="40" width="110" height="10" />
+                <rect x="0" y="50" width="10" height="10" />
+                <rect x="20" y="50" width="70" height="10" />
+                <rect x="100" y="50" width="10" height="10" />
+                <rect x="0" y="60" width="10" height="10" />
+                <rect x="20" y="60" width="10" height="10" />
+                <rect x="80" y="60" width="10" height="10" />
+                <rect x="100" y="60" width="10" height="10" />
+                <rect x="30" y="70" width="10" height="10" />
+                <rect x="70" y="70" width="10" height="10" />
+            </svg>
+        </div>
         <div class="overlay"><a href="games-lib.html"><h4>Single Page Html Games</h4></a></div>
       </div>
+
       <div class="card portfolio-item">
-        <img src="assets/designs.png" loading="lazy" alt="Designs">
+        <div class="execution-stage">
+            <img src="assets/designs.png" class="bg-thumb" alt="Designs Background">
+
+            <div class="prism-wrap">
+                <div class="shape shape-circle"></div>
+                <div class="shape shape-tri"></div>
+                <div class="shape shape-box"></div>
+            </div>
+        </div>
         <div class="overlay"><a href="Design-lib.html"><h4>Designs</h4></a></div>
       </div>
+
     </div>
-  </div>
-</section>
 
 <!-- SIGNAL -->
 <section id="signal">
