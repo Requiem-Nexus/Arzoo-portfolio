@@ -6,213 +6,19 @@
 
 <title>Overview — Freak Nexus</title>
 
-<!-- SEO -->
 <meta name="description" content="Freak Nexus — Designer, Content Strategist, and SEO Specialist building performance-driven digital systems.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://yourdomain.com">
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-<!-- AOS -->
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-<!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-<!-- Schema -->
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"Person",
- "name":"Freak Nexus",
- "url":"https://yourdomain.com",
- "jobTitle":"Designer & Developer"
-}
-</script>
-
 <style>
-
-/* --- FIX: LAYER HIERARCHY --- */
-
-/* 1. Ensure the Overlay is always on top of the animations */
-.overlay {
-    z-index: 10; 
-    /* Make the dark background slightly stronger so text pops */
-    background: rgba(11, 11, 13, 0.85); 
-    /* Optional: Blur the animation behind the text for a cool glass effect */
-    backdrop-filter: blur(4px); 
-}
-
-/* 2. Push the animations/images to the back */
-.execution-stage {
-    z-index: 1;
-}
-
-/* 3. When hovering, push the animations further back visually */
-.portfolio-item:hover .execution-stage {
-    opacity: 0.4; /* Dim the neon graphics so text is clear */
-    transform: scale(1.02); /* Subtle zoom effect */
-    transition: all 0.4s ease;
-}
-
-/* --- EXECUTION VISUALS (Replaces Images) --- */
-/* --- BACKGROUND THUMBNAIL IMAGES --- */
-.bg-thumb {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.25; /* Low opacity so the animation pops */
-    z-index: 0;
-    filter: grayscale(100%); /* Optional: makes it look techy/unified */
-    transition: 0.5s;
-}
-
-/* Ensure animations sit ON TOP of the image */
-.execution-stage > *:not(.bg-thumb) {
-    position: relative;
-    z-index: 1; 
-}
-
-/* Hover Effect: Bring color back to image */
-.portfolio-item:hover .bg-thumb {
-    opacity: 0.4;
-    filter: grayscale(0%);
-    transform: scale(1.05); /* Subtle zoom */
-}
-
-.execution-stage {
-    width: 100%;
-    height: 100%;
-    background: var(--card);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* 1. BLOGS: The Data Stream */
-.data-doc {
-    width: 80px;
-    height: 100px;
-    border: 2px solid var(--content); /* Cyan */
-    border-radius: 4px;
-    position: relative;
-    background: 
-        linear-gradient(to bottom, var(--content) 2px, transparent 2px) 0 10px,
-        linear-gradient(to bottom, var(--content) 2px, transparent 2px) 0 25px,
-        linear-gradient(to bottom, var(--content) 2px, transparent 2px) 0 40px,
-        linear-gradient(to right, var(--content) 2px, transparent 2px) 100% 100%; /* Corner accent */
-    background-size: 60% 4px, 80% 4px, 50% 4px, 10px 10px;
-    background-repeat: no-repeat;
-    box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
-}
-/* The scanning bar */
-.data-doc::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; height: 100%;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,255,204,0.2) 50%, transparent 100%);
-    background-size: 100% 200%;
-    animation: scan-doc 2s linear infinite;
-}
-
-/* 2. GAMES: The SVG Invader */
-.pixel-invader-svg {
-    width: 80px;  /* Explicit size = Perfect centering */
-    height: 60px;
-    fill: var(--seo); /* Orange */
-    animation: bounce-invader 2s ease-in-out infinite alternate;
-}
-
-/* Hover Effect: Changes color */
-.portfolio-item:hover .pixel-invader-svg {
-    fill: var(--accent); /* Cyan */
-    filter: drop-shadow(0 0 5px var(--accent));
-}
-
-@keyframes bounce-invader {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
-}
-
-/* 3. DESIGNS: The Cyber Prism */
-.prism-wrap {
-    position: relative;
-    width: 100px; height: 100px;
-}
-.shape {
-    position: absolute;
-    mix-blend-mode: screen; /* Blends colors where they overlap */
-    opacity: 0.7;
-}
-.shape-circle {
-    width: 60px; height: 60px;
-    background: var(--design); /* Blue */
-    border-radius: 50%;
-    top: 0; left: 20px;
-    animation: float-shape 4s ease-in-out infinite;
-}
-.shape-tri {
-    width: 0; height: 0;
-    border-left: 35px solid transparent;
-    border-right: 35px solid transparent;
-    border-bottom: 60px solid var(--marketing); /* Green */
-    bottom: 0; left: 0;
-    animation: float-shape 4s ease-in-out 1s infinite;
-}
-.shape-box {
-    width: 50px; height: 50px;
-    background: var(--seo); /* Orange */
-    bottom: 10px; right: 0;
-    transform: rotate(45deg);
-    animation: float-shape 4s ease-in-out 2s infinite;
-}
-
-/* --- ANIMATIONS --- */
-@keyframes scan-doc {
-    0% { background-position: 0% -100%; }
-    100% { background-position: 0% 200%; }
-}
-@keyframes bounce-invader {
-    0% { transform: scale(0.6) translateY(0); }
-    100% { transform: scale(0.6) translateY(-10px); }
-}
-@keyframes float-shape {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-5px) rotate(5deg); }
-}
-
-/* Hover States for Cards */
-.portfolio-item:hover .data-doc { border-color: #fff; }
-.portfolio-item:hover .pixel-invader { color: var(--accent); } 
-.portfolio-item:hover .shape { opacity: 1; filter: blur(2px); }
-
-.skills-list { display: flex; flex-direction: column; gap: 1.2rem; }
-.capabilities-wrap { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: center; }
-@media (max-width: 800px){ .capabilities-wrap { grid-template-columns: 1fr; } }
-
-/* PIE CHART */
-.pie-chart{ width:260px; height:260px; margin:auto; }
-.pie-chart text{ fill:#7a9f96; font-size:5px; letter-spacing:.5px; font-weight:500; }
-.pie-legend{ margin-top:1rem; font-size:14px; color:#aaa; text-align:left; }
-
-/* SKILL COLOR MATCH */
-.skill.design .fill{ background:var(--design); }
-.skill.marketing .fill{ background:var(--marketing); }
-.skill.content .fill{ background:var(--content); }
-.skill.seo .fill{ background:var(--seo); }
-.skill.design span{ color:var(--design); }
-.skill.marketing span{ color:var(--marketing); }
-.skill.content span{ color:var(--content); }
-.skill.seo span{ color:var(--seo); }
-
-/* VOID SYSTEM */
+/* --- VOID SYSTEM VARIABLES --- */
 :root{
   --void:#0b0b0d;
   --surface:#0f0f11;
@@ -228,7 +34,7 @@
   --seo:#ff9f43;
 }
 
-/* BASE */
+/* --- BASE STYLES --- */
 *{margin:0;padding:0;box-sizing:border-box}
 body{ font-family:'Poppins',sans-serif; background:var(--surface); color:var(--text); overflow-x:hidden; }
 a{text-decoration:none;color:inherit}
@@ -237,54 +43,88 @@ section{padding:4rem 0}
 h1,h2,h3{color:#fff}
 p{color:var(--muted)}
 
-/* LOGO */
+/* --- NAVIGATION --- */
+.navbar{ position:fixed; top:0; width:100%; background:rgba(11,11,13,.85); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,.06); z-index:999; }
+.navbar .container{ display:flex; justify-content:space-between; align-items:center; padding:1rem 0; }
 .logo{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.4rem; color:#00ff88; }
 
-/* NAV */
-.navbar{ position:fixed; top:0;width:100%; background:rgba(11,11,13,.75); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,.06); z-index:999; }
-.navbar .container{ display:flex; justify-content:space-between; align-items:center; padding:1rem 0; }
+/* Desktop Menu */
 .menu{ display:flex; gap:2rem; }
 .menu a{ font-size:.85rem; letter-spacing:1px; color:#bdbdbd; position:relative; transition:.25s; }
-.menu a::after{ content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--accent); transition:.3s; }
 .menu a:hover{color:#fff}
-.menu a:hover::after{width:100%}
 
-/* HERO */
-.hero{ height:100vh; display:flex; align-items:center; position:relative; background:url("assets/background.webp") center/cover no-repeat; }
+/* Mobile Toggle - Hidden on Desktop */
+.menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.menu-toggle span { width: 25px; height: 2px; background: var(--accent); transition: 0.3s; }
+
+/* --- HERO --- */
+.hero{ min-height:100vh; display:flex; align-items:center; position:relative; background:url("assets/background.png") center/cover no-repeat; }
 .hero::before{ content:""; position:absolute; inset:0; background: radial-gradient(circle at 30% 30%, rgba(0,255,204,.12), transparent 40%), linear-gradient(to bottom, rgba(11,11,13,.2), rgba(11,11,13,.9)); }
 .hero .container{ position:relative; z-index:1; }
-.hero h1{ font-size:3.2rem; line-height:1.1; }
-.hero p{ margin-top:1rem; font-size:1.2rem; }
+.hero h1{ font-size: clamp(2rem, 8vw, 3.2rem); line-height: 1.1; }
 #typing{color:var(--accent)}
 
-/* HEADINGS */
-h2{ text-align:center; margin-bottom:2rem; font-size:2.2rem; }
+/* --- SERVICES --- */
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.6rem; }
+.service-card { background: linear-gradient(180deg, var(--card), var(--void)); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; position: relative; overflow: hidden; transition: 0.35s ease; }
+.service-icon { font-size: 32px; margin-bottom: 1rem; color: var(--accent); }
+.service-title { font-size: 1.1rem; font-weight: 600; margin-bottom: .6rem; }
 
-/* CARDS */
-.card{ background:linear-gradient(180deg,var(--card),var(--void)); border:1px solid var(--border); border-radius:10px; padding:2rem; transition:.35s; }
-.card:hover{ transform:translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.7), inset 0 0 0 1px rgba(0,255,204,.08); }
-
-/* SKILLS */
-.skill{margin-bottom:1.2rem}
-.skill span{display:block;margin-bottom:.4rem;color:#ccc}
+/* --- CAPABILITIES --- */
+.capabilities-wrap { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: center; }
+.skill span{display:block;margin-bottom:.4rem; color:#ccc}
 .bar{background:#222;height:8px;border-radius:20px;overflow:hidden}
-.fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.fill{height:100%}
+.pie-chart{ width:260px; height:260px; margin:auto; display: block; }
+.pie-chart text{ fill:#7a9f96; font-size:5px; font-weight:500; }
 
-/* GRID */
-.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
+/* --- EXECUTIONS (RESTORED ANIMATIONS) --- */
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
+.portfolio-item{ position:relative; height:250px; overflow:hidden; padding:0; cursor: pointer; border: 1px solid var(--border); border-radius: 10px;}
+.execution-stage { width: 100%; height: 100%; background: var(--card); position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+.bg-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; transition: 0.5s; filter: grayscale(100%); }
 
-/* PORTFOLIO */
-.portfolio-item{ position:relative; height:200px; overflow:hidden; padding:0; }
-.portfolio-item img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.overlay{ position:absolute; inset:0; background:linear-gradient(to bottom, rgba(15,15,17,.6), rgba(15,15,17,.9)); display:flex; justify-content:center; align-items:center; opacity:0; transition:.4s; }
+.overlay{ position:absolute; inset:0; background: rgba(11, 11, 13, 0.85); backdrop-filter: blur(4px); display:flex; justify-content:center; align-items:center; opacity:0; transition:.4s; z-index: 10; }
 .overlay h4{ color:var(--accent); letter-spacing:1px; }
-.portfolio-item:hover .overlay{opacity:1}
 
-/* CTA */
-.cta-button{ position:relative; padding:14px 22px; background:#000; color:#eaeaea; font-weight:600; border:none; border-radius:10px; cursor:pointer; isolation:isolate; }
-.cta-button::before{ content:""; position:absolute; inset:0; border-radius:10px; padding:6px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; }
+/* Animation: Data Doc */
+.data-doc {
+    width: 80px; height: 100px; border: 2px solid var(--content); border-radius: 4px; position: relative;
+    background: linear-gradient(to bottom, var(--content) 2px, transparent 2px) 0 10px,
+                linear-gradient(to bottom, var(--content) 2px, transparent 2px) 0 25px,
+                linear-gradient(to bottom, var(--content) 2px, transparent 2px) 0 40px;
+    background-size: 60% 4px, 80% 4px, 50% 4px; background-repeat: no-repeat;
+}
+.data-doc::after { content: ''; position: absolute; inset:0; background: linear-gradient(to bottom, transparent, rgba(0,255,204,0.2), transparent); background-size: 100% 200%; animation: scan-doc 2s linear infinite; }
 
-/* FOOTER */
+/* Animation: Pixel Invader */
+.pixel-invader-svg { width: 80px; height: 60px; fill: var(--seo); animation: bounce-invader 2s ease-in-out infinite alternate; }
+
+/* Animation: Prism */
+.prism-wrap { position: relative; width: 100px; height: 100px; }
+.shape { position: absolute; mix-blend-mode: screen; opacity: 0.7; }
+.shape-circle { width: 60px; height: 60px; background: var(--design); border-radius: 50%; top: 0; left: 20px; animation: float-shape 4s infinite; }
+.shape-tri { width: 0; height: 0; border-left: 35px solid transparent; border-right: 35px solid transparent; border-bottom: 60px solid var(--marketing); bottom: 0; animation: float-shape 4s 1s infinite; }
+.shape-box { width: 50px; height: 50px; background: var(--seo); bottom: 10px; right: 0; transform: rotate(45deg); animation: float-shape 4s 2s infinite; }
+
+@keyframes scan-doc { 0% { background-position: 0% -100%; } 100% { background-position: 0% 200%; } }
+@keyframes bounce-invader { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+@keyframes float-shape { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-5px) rotate(5deg); } }
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media (max-width: 800px) {
+    .capabilities-wrap { grid-template-columns: 1fr; }
+    .menu-toggle { display: flex; }
+    .menu { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: var(--void); flex-direction: column; justify-content: center; align-items: center; transition: 0.4s; z-index: 1000; border-left: 1px solid var(--border); }
+    .menu.active { right: 0; }
+    /* Mobile usability: make overlays visible by default */
+    .overlay { opacity: 0.9; background: linear-gradient(transparent, var(--void)); align-items: flex-end; padding: 20px; }
+}
+
+/* --- CTA & BUTTONS --- */
+.cta-button{ position:relative; padding:14px 22px; background:#000; color:#eaeaea; font-weight:600; border:none; border-radius:10px; cursor:pointer; isolation:isolate; width: 100%; max-width: 400px; }
+.cta-button::before{ content:""; position:absolute; inset:0; border-radius:10px; padding:2px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; }
+
 footer{ text-align:center; padding:2rem; border-top:1px solid var(--border); color:#777; }
 </style>
 </head>
@@ -294,8 +134,12 @@ footer{ text-align:center; padding:2rem; border-top:1px solid var(--border); col
 <header class="navbar">
   <div class="container">
     <div class="logo">&lt;/Arzoo&gt;</div>
-    <nav class="menu">
+    <div class="menu-toggle" id="mobile-toggle">
+        <span></span><span></span><span></span>
+    </div>
+    <nav class="menu" id="nav-list">
       <a href="#about">About</a>
+      <a href="#services">Services</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#executions">Executions</a>
       <a href="#signal">Signal</a>
@@ -305,12 +149,12 @@ footer{ text-align:center; padding:2rem; border-top:1px solid var(--border); col
 
 <section class="hero">
   <div class="container">
-    <h1>
+    <h1 data-aos="fade-right">
       I Design Systems<br>
       That Turn Attention<br>
       Into Measurable Growth
     </h1>
-    <p>
+    <p style="margin-top:1.5rem">
       I operate where strategy, content, and execution intersect.
       <br>
       <span id="typing"></span>
@@ -318,57 +162,84 @@ footer{ text-align:center; padding:2rem; border-top:1px solid var(--border); col
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="container">
     <h2>About</h2>
-    <div class="card" data-aos="fade-up">
-      <p style="color:#cfcfcf;margin-bottom:1rem">
-        I am a results-driven digital professional specializing in marketing, design, content writing, and search engine optimization (SEO). I focus on building strategies and digital assets that align with audience intent while delivering measurable growth and visibility.<br>
-
-<br>As a marketer, I work with a strategy-first approach to ensure every initiative supports clear business objectives. As a designer, I create clean, user-focused visuals that enhance brand identity and improve user experience. In content writing, I produce structured, engaging, and value-driven content that builds trust and authority. In SEO, I apply data-backed techniques, keyword research, and on-page optimization to drive sustainable organic performance.<br>
-
-<br>I combine creativity, design thinking, and analytics to deliver digital solutions that are practical, scalable, and performance-oriented.
+    <div class="card" style="background:var(--card); padding:2rem; border-radius:10px; border:1px solid var(--border);" data-aos="fade-up">
+      <p style="color:#cfcfcf;">
+        I am a results-driven digital professional specializing in marketing, design, content writing, and search engine optimization (SEO). I focus on building strategies and digital assets that align with audience intent while delivering measurable growth and visibility.<br><br>
+        I combine creativity, design thinking, and analytics to deliver digital solutions that are practical, scalable, and performance-oriented.
+      </p>
     </div>
   </div>
 </section>
 
-<!-- CAPABILITIES -->
+<section id="services">
+  <div class="container">
+    <h2>Services</h2>
+    <div class="services-grid" data-aos="fade-up">
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3 class="service-title">Search Engine Marketing</h3>
+        <p>ROI-driven paid search campaigns engineered for precision targeting.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3 class="service-title">Search Engine Optimization</h3>
+        <p>Technical SEO and content architecture for organic growth.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📱</div>
+        <h3 class="service-title">Social Media Marketing</h3>
+        <p>Platform-native strategies that build signal and authority.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✍️</div>
+        <h3 class="service-title">Content Writing</h3>
+        <p>Structured, research-backed content engineered for trust.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💡</div>
+        <h3 class="service-title">Copywriting</h3>
+        <p>Persuasive messaging aligned with conversion intent.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📝</div>
+        <h3 class="service-title">Blog Systems</h3>
+        <p>Topic clustering and internal linking editorial systems.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎯</div>
+        <h3 class="service-title">Keyword Architecture</h3>
+        <p>High-intent keyword mapping aligned with ranking feasibility.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="capabilities">
   <div class="container">
     <h2>Capabilities</h2>
-
-    <div class="card" data-aos="fade-up" style="margin-bottom:2.5rem">
-      I don’t list everything here by design.
-      <br><br>
-      Much of my work lives inside systems — research frameworks, content architectures, internal tooling, and SEO structures that don’t translate cleanly into visuals.
-    </div>
-
     <div class="capabilities-wrap">
-      <!-- LEFT: SKILL BARS -->
       <div class="skills-list">
-        <div class="skill design">
-          <span>Designing</span>
-          <div class="bar"><div class="fill" style="width:60%"></div></div>
+        <div class="skill" style="margin-bottom:1.5rem">
+          <span style="color:var(--design)">Designing</span>
+          <div class="bar"><div class="fill" style="width:60%; background:var(--design)"></div></div>
         </div>
-
-        <div class="skill marketing">
-          <span>Marketing</span>
-          <div class="bar"><div class="fill" style="width:75%"></div></div>
+        <div class="skill" style="margin-bottom:1.5rem">
+          <span style="color:var(--marketing)">Marketing</span>
+          <div class="bar"><div class="fill" style="width:75%; background:var(--marketing)"></div></div>
         </div>
-
-        <div class="skill content">
-          <span>Content Writing</span>
-          <div class="bar"><div class="fill" style="width:85%"></div></div>
+        <div class="skill" style="margin-bottom:1.5rem">
+          <span style="color:var(--content)">Content Writing</span>
+          <div class="bar"><div class="fill" style="width:85%; background:var(--content)"></div></div>
         </div>
-
-        <div class="skill seo">
-          <span>SEO</span>
-          <div class="bar"><div class="fill" style="width:60%"></div></div>
+        <div class="skill">
+          <span style="color:var(--seo)">SEO</span>
+          <div class="bar"><div class="fill" style="width:60%; background:var(--seo)"></div></div>
         </div>
       </div>
 
-      <!-- RIGHT: PIE CHART -->
       <div>
         <svg viewBox="0 0 42 42" class="pie-chart">
           <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#1f1f23" stroke-width="6"/>
@@ -378,36 +249,27 @@ footer{ text-align:center; padding:2rem; border-top:1px solid var(--border); col
           <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#ff9f43" stroke-width="6" stroke-dasharray="18 82" stroke-dashoffset="-82"/>
           <text x="21" y="21" text-anchor="middle" dominant-baseline="central">Skill Mix</text>
         </svg>
-        <p style="font-size:14px;color:#8f8f8f;text-align:center;margin-top:1rem">
-          This reflects focus distribution, not skill limits.
-        </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EXECUTIONS -->
 <section id="executions">
   <div class="container">
     <h2>Executions</h2>
-    <p style="text-align:center;color:#9a9a9a;margin-bottom:2rem">
-      Selected executions. Most work operates behind the surface.
-    </p>
-<div class="grid">
+    <div class="grid">
       
-      <div class="card portfolio-item">
+      <div class="portfolio-item">
         <div class="execution-stage">
-            <img src="assets/blogs.webp" class="bg-thumb" alt="Blogs Background">
-            
+            <img src="assets/blogs.png" class="bg-thumb" alt="Blogs">
             <div class="data-doc"></div>
         </div>
-        <div class="overlay"><a href="blogs-lib.html"><h4>Blogs</h4></a></div>
+        <a href="blogs-lib.html" class="overlay"><h4>Blogs</h4></a>
       </div>
 
-      <div class="card portfolio-item">
+      <div class="portfolio-item">
         <div class="execution-stage">
-            <img src="assets/games.webp" class="bg-thumb" alt="Games Background">
-
+            <img src="assets/games.png" class="bg-thumb" alt="Games">
             <svg class="pixel-invader-svg" viewBox="0 0 110 80">
                 <rect x="20" y="0" width="10" height="10" />
                 <rect x="80" y="0" width="10" height="10" />
@@ -429,65 +291,57 @@ footer{ text-align:center; padding:2rem; border-top:1px solid var(--border); col
                 <rect x="70" y="70" width="10" height="10" />
             </svg>
         </div>
-        <div class="overlay"><a href="games-lib.html"><h4>Single Page Html Games</h4></a></div>
+        <a href="games-lib.html" class="overlay"><h4>HTML Games</h4></a>
       </div>
 
-      <div class="card portfolio-item">
+      <div class="portfolio-item">
         <div class="execution-stage">
-            <img src="assets/designs.webp" class="bg-thumb" alt="Designs Background">
-
+            <img src="assets/designs.png" class="bg-thumb" alt="Designs">
             <div class="prism-wrap">
                 <div class="shape shape-circle"></div>
                 <div class="shape shape-tri"></div>
                 <div class="shape shape-box"></div>
             </div>
         </div>
-        <div class="overlay"><a href="Design-lib.html"><h4>Designs</h4></a></div>
+        <a href="Design-lib.html" class="overlay"><h4>Designs</h4></a>
       </div>
 
-    </div>
-
-<!-- SIGNAL -->
-<section id="signal">
-  <div style="max-width: 600px; margin: 40px auto; text-align: center;">
-    <p style="color:#a8a8a8; line-height:1.8; margin-bottom:30px;">
-      Ready to explore the intersection of strategy, creation, and abstraction? Let's build something that endures.
-    </p>
-    <div style="display: grid; gap: 15px;">
-      <button class="cta-button" style="width:100%; text-align:center; margin-top:0;" onclick="window.location.href='mailto:Nemesistrionpid@proton.me';">
-        <strong>Connect With Me</strong>
-      </button>
     </div>
   </div>
 </section>
 
-<footer>
-  Signal Stable • Systems First • Obsidian Pulse
-</footer>
+<section id="signal">
+  <div class="container" style="text-align: center;">
+    <p style="margin-bottom:2rem">Let's build something that endures.</p>
+    <button class="cta-button" onclick="window.location.href='mailto:Nemesistrionpid@proton.me';">
+        Connect With Me
+    </button>
+  </div>
+</section>
+
+<footer>SIGNAL STABLE • SYSTEMS FIRST • OBSIDIAN PULSE</footer>
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>AOS.init({duration:900,once:true});</script>
 
 <script>
-const words=["Content Strategist","SEO Specialist","Digital Systems Designer"];
-let i=0,j=0,d=false,el=document.getElementById("typing");
-(function t(){
-  el.textContent=words[i].slice(0,j);
-  d?j--:j++;
-  if(j===words[i].length)d=true;
-  if(j===0&&d){d=false;i=(i+1)%words.length}
-  setTimeout(t,d?80:120);
-})();
-</script>
+    AOS.init({duration:900, once:true});
 
-<script>
-gsap.registerPlugin(ScrollTrigger);
-gsap.from(".hero h1",{y:80,opacity:0,duration:1.2,ease:"power4.out"});
-gsap.utils.toArray("section").forEach(s=>{
-  gsap.from(s,{opacity:0,y:60,scrollTrigger:{trigger:s,start:"top 85%"}});
-});
+    // Mobile Navigation Logic
+    const toggle = document.getElementById('mobile-toggle');
+    const nav = document.getElementById('nav-list');
+    toggle.addEventListener('click', () => nav.classList.toggle('active'));
+
+    // Typing Effect
+    const words=["Content Strategist","SEO Specialist","Systems Designer"];
+    let i=0,j=0,d=false,el=document.getElementById("typing");
+    (function t(){
+      el.textContent=words[i].slice(0,j);
+      d?j--:j++;
+      if(j===words[i].length)d=true;
+      if(j===0&&d){d=false;i=(i+1)%words.length}
+      setTimeout(t,d?80:120);
+    })();
 </script>
 
 </body>
 </html>
-
